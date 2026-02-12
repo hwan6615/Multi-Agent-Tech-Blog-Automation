@@ -1,0 +1,36 @@
+# --- Byte-compiled / optimized / DLL files ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Virtual Environments (uv & general) ---
+.venv/
+venv/
+ENV/
+env/
+
+# --- Environment Variables (Security) ---
+# API 키가 포함된 이 파일은 절대로 GitHub에 올라가면 안 됩니다.
+.env
+.env.local
+.env.shared
+
+# --- Streamlit ---
+.streamlit/
+! .streamlit/config.toml
+
+# --- Python build / distribution ---
+dist/
+build/
+*.egg-info/
+
+# --- Data & Logs ---
+*.log
+data/
+outputs/
+
+# --- OS specific files ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
