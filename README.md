@@ -79,7 +79,7 @@ uv sync
 ```
 
 ### 2. 환경 변수 설정
- - 프로젝트 최상단에 .env 파일을 생성하고 API 키를 입력합니다.
+ - 프로젝트 최상단에 .env 파일을 생성하고, OpenAI, Tavily 키와 함께 LangSmith 설정을 입력합니다.
 ```bash
 # LLM & Search API
 OPENAI_API_KEY=your_openai_api_key
