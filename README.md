@@ -28,7 +28,12 @@
 
 ## 🖼️ Dashboard Demo
 
-![Dashboard Demo](demo_img.png)
+<!-- ![Dashboard Demo](./result imgs/1.png) -->
+| | | |
+| :---: | :---: | :---: |
+| ![1](./result%20imgs/1.png) | ![2](./result%20imgs/2.png) | ![3](./result%20imgs/3.png) |
+| ![4](./result%20imgs/4.png) | ![5](./result%20imgs/5.png) | ![6](./result%20imgs/6.png) |
+
 *RAG 기반 에이전트가 전체 도구 라이브러리에서 의미론적 유사도를 기반으로 도구를 추출하고 추론하는 과정입니다.*
 
 ---
