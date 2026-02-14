@@ -8,9 +8,19 @@ from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_community.tools.tavily_search import TavilySearchResults
 
 import streamlit as st
-
+    
 # 1. 환경 설정
 load_dotenv()
+
+st.sidebar.write("### LangSmith 설정 확인")
+st.sidebar.write(f"Tracing Enabled: {os.environ.get('LANGCHAIN_TRACING_V2')}")
+st.sidebar.write(f"Project Name: {os.environ.get('LANGCHAIN_PROJECT')}")
+api_key = os.environ.get('LANGCHAIN_API_KEY')
+if api_key:
+    st.sidebar.write(f"API Key Loaded: {api_key[:5]}...") # 키 앞부분만 확인
+else:
+    st.sidebar.error("API Key가 없습니다! .env를 확인하세요.")
+    
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 tavily = TavilySearchResults(max_results=3)
 

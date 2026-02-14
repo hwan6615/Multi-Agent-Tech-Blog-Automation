@@ -1,6 +1,6 @@
 # 🤖 AI Editor Team: Multi-Agent Tech Blog Automation
 
-이 프로젝트는 LangGraph를 활용하여 여러 AI 에이전트가 협업하고 서로의 결과물을 검수하며 고품질의 테크 블로그 포스팅을 자동 생성하는 자율형 멀티 에이전트 시스템입니다.
+이 프로젝트는 LangGraph를 활용하여 여러 AI 에이전트가 협업하고 서로의 결과물을 검수하며 고품질의 테크 블로그 포스팅을 자동 생성하는 자율형 멀티 에이전트 시스템입니다. 단순 생성(Generation)을 넘어, LangSmith를 통한 실행 추적(Tracing)과 최적화까지 포함된 엔지니어링 프로젝트입니다.
 
 ---
 
@@ -12,6 +12,7 @@
 | **품질 관리** | 한 번 생성 후 종료 | 에디터의 피드백 및 재작성 루프 |
 | **자율성** | 정해진 순서만 따름 | 조건부 분기(Router)를 통한 자율 결정 |
 | **유연성** | 중간 오류 대응 어려움 | Self-Correction (자가 수정) 가능 |
+| **운영 관리**	| 블랙박스 (내부 파악 불가) | LangSmith를 통한 실시간 Tracing 및 디버깅 |
 
 ---
 
@@ -26,20 +27,30 @@
 
 ---
 
-## 🖼️ Dashboard Demo
+## 🖼️ Dashboard & Observability
 
-<!-- ![Dashboard Demo](./result imgs/1.png) -->
+### 1. Streamlit Dashboard (User Interface)
 | | | |
 | :---: | :---: | :---: |
 | ![1](./result%20imgs/1.png) | ![2](./result%20imgs/2.png) | ![3](./result%20imgs/3.png) |
 | ![4](./result%20imgs/4.png) | ![5](./result%20imgs/5.png) | ![6](./result%20imgs/6.png) |
 
-*RAG 기반 에이전트가 전체 도구 라이브러리에서 의미론적 유사도를 기반으로 도구를 추출하고 추론하는 과정입니다.*
+> *사용자가 주제를 입력하면 검색(Search), 작성(Draft), 검수(Critique)의 전 과정을 실시간으로 시각화합니다.*
+
+<br>
+
+### 2. LangSmith Tracing (Logic & Optimization)
+![LangSmith Tracing](./result%20imgs/LangSmith%20Tracing.png)
+
+> LangSmith를 통해 에이전트 간의 **순환 구조(Cyclic Loop)**와 **Self-Correction** 과정을 트레이싱한 결과입니다.
+> - **Red Box**: Editor의 반려(Reject)로 인해 Writer가 재실행되는 구간을 시각적으로 검증.
+> - **Latency Analysis**: 각 단계별 실행 시간과 토큰 사용량을 모니터링하여 최적화 수행.
 
 ---
 
 ## 🚀 주요 기능
 * **Cyclic Feedback Loop**: 에디터 에이전트가 만족할 때까지 최대 3회까지 글을 다듬는 자가 수정 메커니즘을 갖추고 있습니다.
+* **MLOps & Observability**: LangSmith를 도입하여 복잡한 에이전트 간 상호작용을 트레이싱하고, 병목 구간 식별 및 토큰 비용을 최적화합니다.
 * **State Management**: LangGraph의 AgentState를 통해 에이전트 간 대화 맥락과 작업 이력을 완벽하게 공유합니다.
 * **Real-time Web Research**: 최신 테크 트렌드를 반영하기 위해 실시간 웹 검색 도구를 통합했습니다.
 * **Interactive Dashboard**: Streamlit을 통해 에이전트 간의 협업 과정과 피드백 내용을 실시간으로 시각화합니다.
@@ -49,6 +60,7 @@
 ## 🛠️ 기술 스택
 * **Orchestration**: LangGraph, LangChain
 * **LLM API**: OpenAI (gpt-4o-mini)
+* **Observability (MLOps)**: LangSmith
 * **Search Engine**: Tavily API
 * **Interface**: Streamlit
 * **Environment**: Python 3.12, uv, python-dotenv
@@ -69,8 +81,15 @@ uv sync
 ### 2. 환경 변수 설정
  - 프로젝트 최상단에 .env 파일을 생성하고 API 키를 입력합니다.
 ```bash
+# LLM & Search API
 OPENAI_API_KEY=your_openai_api_key
 TAVILY_API_KEY=your_tavily_api_key
+
+# LangSmith (Tracing & Monitoring)
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
+LANGCHAIN_API_KEY=your_langsmith_api_key
+LANGCHAIN_PROJECT=ai-tech-blog-team
 ```
 
 ### 3. 실행
@@ -83,5 +102,6 @@ uv run streamlit run app.py
 
 ## 📈 프로젝트 성과 및 인사이트
  - 에이전트 협업 효율화: 단일 LLM 호출보다 다각도 검수를 통해 정보의 정확도와 문장 구조의 완성도가 획기적으로 향상되었습니다.
+ - 데이터 기반 최적화 (Data-Driven Optimization): LangSmith를 통해 에이전트의 실행 경로를 분석하고, 불필요한 검색 호출을 줄여 응답 속도와 비용을 최적화했습니다.
  - 제어 가능한 자율성: 무한 루프 방지 로직과 단계별 프롬프트 최적화를 통해 실무에서 사용 가능한 수준의 에이전트 워크플로우를 구현했습니다.
  - 최신 정보의 결합: 정적 학습 데이터의 한계를 웹 검색 도구와의 유기적인 결합으로 극복했습니다.
