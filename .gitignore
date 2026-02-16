@@ -16,6 +16,8 @@ env/
 .env.shared
 
 # --- Streamlit ---
+# secrets.toml 같은 보안 파일이 올라가는 것을 막기 위해 폴더 전체를 무시하고
+# 디자인 설정인 config.toml만 예외적으로 허용하는 좋은 설정입니다.
 .streamlit/
 ! .streamlit/config.toml
 
@@ -34,3 +36,8 @@ outputs/
 Thumbs.db
 .idea/
 .vscode/
+
+# --- Milvus & Docker Volumes (V2 필수 추가!) ---
+# Docker가 생성하는 DB 데이터 파일들입니다. 용량이 크니 꼭 제외하세요.
+volumes/
+milvus_memory.db
