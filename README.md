@@ -32,23 +32,55 @@
 
 ---
 
-## 🖼️ Dashboard & Observability
+## 💻 실행 예시 (Demo & Proof of Concept)
 
-### 1. Streamlit Dashboard (User Interface)
-| | | |
-| :---: | :---: | :---: |
-| ![1](./result%20imgs/1.png) | ![2](./result%20imgs/2.png) | ![3](./result%20imgs/3.png) |
-| ![4](./result%20imgs/4.png) | ![5](./result%20imgs/5.png) | ![6](./result%20imgs/6.png) |
+v2 시스템이 어떻게 과거의 경험을 회상하고, 지속적으로 품질을 개선하는지 실제 사례를 통해 증명합니다.
 
-> *v2 업데이트: "🧠 활성화된 장기 기억 (Milvus)" 섹션이 추가되어, 에이전트가 어떤 과거 피드백을 참고했는지 실시간으로 확인할 수 있습니다.**
+### 1. 🧠 장기 기억 활성화 (Memory Retrieval)
+새로운 주제인 **"LangGraph의 단점"**을 입력했을 때, 시스템은 Milvus DB에서 이전에 수행했던 유사 주제(**"LangGraph의 장점"**)의 피드백을 자동으로 호출합니다.
+
+| Milvus 장기 기억 호출 (유사도 0.93) 및 회상된 과거 피드백 상세 |
+| :---: | :---: |
+| ![Memory_Hit](./result_imgs/result1.png) | ![Memory_Detail](./result_imgs/result2.png) |
+
+> **Key Insight**: 단순히 글을 쓰는 것이 아니라, 과거에 지적받았던 **"서론의 명확성"**, **"구조적 일관성"** 등의 데이터를 [유사도 0.93]으로 정확히 찾아내어 Writer에게 전달합니다.
 
 <br>
 
-### 2. LangSmith Tracing (Memory Logic Validation)
-![LangSmith Tracing](./result%20imgs/LangSmith%20Tracing.png)
+### 2. 🔄 에이전트 간 자가 수정 루프 (Agentic Feedback Loop)
+Editor 에이전트는 Writer가 작성한 초안이 과거의 피드백과 현재의 품질 기준을 만족하는지 엄격하게 검수합니다.
 
-> Retrieval Check: 주제와 무관한 기억은 필터링하고, 유의미한 기억만 프롬프트에 주입(Injection)되는 과정을 검증합니다.*
-> - **Improvement Tracking**: 기억을 되살린 후 수정 횟수(Revision Loop)가 감소하는 효율성을 시각화합니다.
+| 에디터의 반려 및 비평 (Critique) |
+| :---: | :---: |
+| ![Critique](./result_imgs/result3.png) | ![Approval_Process](./result_imgs/result4.png) |
+
+> **Self-Correction Logic**:
+> - **반려(REVISE)**: 피드백 반영 미흡 시 이유를 명시하여 재작성 요청 (Rev 2 과정).
+> - **승인(ACCEPT)**: 지시 사항이 완벽히 반영된 것을 확인 후 최종 승인 (Rev 3 과정).
+
+<br>
+
+### 3. 📊 LangSmith를 통한 MLOps 추적 (Observability)
+복잡한 멀티 에이전트의 순환 구조와 각 단계별 지연 시간(Latency)을 실시간으로 모니터링합니다.
+
+![LangSmith Tracing](./result_imgs/lang_smith.png)
+
+> **Tracing Analysis**:
+> - **Multi-Agent Coordination**: Researcher, Writer, Editor 간의 유기적인 핸드오버 확인.
+> - **Total Latency**: 약 73.63초의 실행 시간 동안 총 3회의 수정 과정을 거쳐 고품질 콘텐츠 도출.
+
+<br>
+
+### 4. 📝 최종 결과물 (Sample Output)
+과거의 피드백이 완벽히 반영된 최종 블로그 포스팅의 모습입니다.
+
+| 최종 결과물 상단 (서론 ~ 본문 2) | 최종 결과물 하단 (본문 3 ~ 결론) |
+| :---: | :---: |
+| ![Final_1](./result_imgs/result5.png) | ![Final_2](./result_imgs/result6.png) |
+
+> **개선 사항 반영 결과**:
+> - **구조적 일관성**: "문제점 → 영향 → 예시"의 통일된 레이아웃 적용.
+> - **전문성 강화**: 'Human-in-the-loop' 등 기술 용어에 대한 명확한 설명 및 결론부 제언 추가.
 
 ---
 
