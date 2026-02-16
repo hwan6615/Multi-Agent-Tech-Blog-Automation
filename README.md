@@ -39,9 +39,15 @@ v2 시스템이 어떻게 과거의 경험을 회상하고, 지속적으로 품�
 ### 1. 🧠 장기 기억 활성화 (Memory Retrieval)
 새로운 주제인 **"LangGraph의 단점"**을 입력했을 때, 시스템은 Milvus DB에서 이전에 수행했던 유사 주제(**"LangGraph의 장점"**)의 피드백을 자동으로 호출합니다.
 
-| Milvus 장기 기억 호출 (유사도 0.93) | 회상된 과거 피드백 상세 |
-| :---: | :---: |
-| ![Memory_Hit](./result_imgs/result1.png) | ![Memory_Detail](./result_imgs/result2.png) |
+<table>
+  <tr>
+    <th colspan="2">Milvus 장기 기억 호출 (유사도 0.93) 및 회상된 과거 피드백 상세</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="./result_imgs/result1.png" alt="Memory_Hit" /></td>
+    <td align="center"><img src="./result_imgs/result2.png" alt="Memory_Detail" /></td>
+  </tr>
+</table>
 
 > **Key Insight**: 단순히 글을 쓰는 것이 아니라, 과거에 지적받았던 **"서론의 명확성"**, **"구조적 일관성"** 등의 데이터를 [유사도 0.93]으로 정확히 찾아내어 Writer에게 전달합니다.
 
@@ -50,9 +56,15 @@ v2 시스템이 어떻게 과거의 경험을 회상하고, 지속적으로 품�
 ### 2. 🔄 에이전트 간 자가 수정 루프 (Agentic Feedback Loop)
 Editor 에이전트는 Writer가 작성한 초안이 과거의 피드백과 현재의 품질 기준을 만족하는지 엄격하게 검수합니다.
 
-| 에디터의 반려 및 비평 (Critique) | 수정 및 최종 승인 프로세스 |
-| :---: | :---: |
-| ![Critique](./result_imgs/result3.png) | ![Approval_Process](./result_imgs/result4.png) |
+<table>
+  <tr>
+    <th colspan="2">에디터의 반려 및 비평 (Critique) 및 수정/최종 승인 프로세스</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="./result_imgs/result3.png" alt="Critique" /></td>
+    <td align="center"><img src="./result_imgs/result4.png" alt="Approval_Process" /></td>
+  </tr>
+</table>
 
 > **Self-Correction Logic**:
 > - **반려(REVISE)**: 피드백 반영 미흡 시 이유를 명시하여 재작성 요청 (Rev 2 과정).
